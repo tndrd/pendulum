@@ -15,5 +15,5 @@ if __name__ == "__main__":
     view = View(1024, 7)
     contr = Controller(on_lclick, on_rclick)
 
-    sim = Simulation(fps, model, view, contr, [make_dissipattor(10, 10)])
+    sim = Simulation(fps, model, view, contr, [make_dissipattor(5, 5)])
     sim.start()

@@ -116,7 +116,7 @@ class Model:
         _, __, w1, w2 = q
         Q = np.empty(2, dtype=CALC_TYPE)
 
-        Q[0] = -b1 * w1
+        Q[0] = -(b1 + b2) * w1
         Q[1] = -b2 * w2
 
         return Q        
