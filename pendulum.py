@@ -174,6 +174,7 @@ class View:
 
     def _circ(self, x, r, color):
         pygame.draw.circle(self.screen, color, x, r)
+        pygame.draw.circle(self.screen, (0, 0, 0), x, r, width=2)
 
     def draw(self, model: Model, interactors):
         params = model.params
@@ -271,6 +272,7 @@ class Simulation:
         self.fps = fps
         self.rtime = self.model.state.t
         self.interactors = interactors
+        self.speedup_factor = 1
 
     def _compose_interactors(self, int2):
         newint = []
@@ -280,6 +282,12 @@ class Simulation:
             newint.append(intr)
         return newint
 
+    def speedup(self, factor: int):
+        if factor < 1:
+            raise RuntimeError("Speedup factor should be integer not less that 1")
+
+        self.speedup_factor = factor
+
     def start(self):
         steps_per_frame = np.round(1/(self.fps * self.model.params.dt)).astype(int)
 
@@ -288,7 +296,7 @@ class Simulation:
 
             intrs = self._compose_interactors(self.controller.process_events())
             
-            for i in range(steps_per_frame):
+            for i in range(steps_per_frame * self.speedup_factor):
                 self.model.update(intrs)
             
             self.view.draw(self.model, intrs)
