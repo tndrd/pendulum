@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 
 DERIV_H = 1e-2
 FIT_TOLERANCE = 1e-3
