@@ -35,3 +35,7 @@ python3 demo_interactive.py
 ## Demo video
 
 ![gif](assets/pendulum.gif)
+
+## Demo video #2: 3x speed
+
+![gif2](assets/pendulum_3x.gif)
